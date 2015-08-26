@@ -1,18 +1,20 @@
 <nav class="navbar navbar-default" role="navigation">
-  <div class="navbar-header">
-    <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="/">Storedom</a>
-  </div>
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-      <li>
-        <%= link_to 'Stores', stores_path %>
-      </li>
+<div class="navbar-header">
+  <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="navbar-brand" href="/">Storedom</a>
+</div>
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <ul class="nav navbar-nav">
+    <li>
+      <%= link_to 'Stores', stores_path %>
+    </li>
+
+    <% if registered_user? %>
       <li>
         <%= link_to 'Items', items_path %>
       </li>
@@ -22,17 +24,18 @@
       <li>
         <%= link_to 'Orders', orders_path %>
       </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <% if current_user %>
-        <li>
-          <%= link_to 'Logout', logout_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to 'Login', login_path %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+    <% end %>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <% if current_user %>
+      <li>
+        <%= link_to 'Logout', logout_path, method: :delete %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to 'Login', login_path %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 </nav>
