@@ -6,8 +6,12 @@ class PermissionService
   end
 
   def allow?(controller, action)
-    return true if controller == 'stores'   && action == 'index'
-    return true if controller == 'sessions' && action.in?(%w(new))
+    if user && user.registered_user?
+      return true if controller == 'stores'   && action.in?(%w(index show))
+      return true if controller == 'sessions' && action.in?(%w(new create destroy))
+    else
+      return true if controller == 'stores'   && action == 'index'
+      return true if controller == 'sessions' && action.in?(%w(new create))
+    end
   end
-
 end
