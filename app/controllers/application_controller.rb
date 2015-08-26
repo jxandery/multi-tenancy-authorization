@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  before_action :authorize!
+
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
@@ -15,5 +17,10 @@ class ApplicationController < ActionController::Base
     @current_permission ||= PermissionService.new(current_user)
   end
 
+  def authorize!
+    unless current_permission.allow?(params[:controller], params[:action])
+      redirect_to root_url, danger: 'You dont know me.'
+    end
+  end
 
 end
